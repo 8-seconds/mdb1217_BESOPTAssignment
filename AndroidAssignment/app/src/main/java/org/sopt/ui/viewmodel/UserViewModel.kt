@@ -6,6 +6,6 @@ import org.sopt.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(private val repo : UserRepo) : BaseViewModel() {
+class UserViewModel@Inject constructor() : BaseViewModel() {
 
 }
