@@ -13,7 +13,7 @@ open class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment(){
 
     open val layoutResourceId: Int = 0
 
-    open val viewModel: R = TODO()
+    open val viewModel: R by lazy { viewModel }
 
     /**
      * initiate view and click event

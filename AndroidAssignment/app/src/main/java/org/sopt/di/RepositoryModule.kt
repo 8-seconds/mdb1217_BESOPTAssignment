@@ -11,14 +11,14 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun userRepo() {
-
+    fun userRepo() : Int {
+        return 0
     }
 
     @Provides
     @Singleton
-    fun homeRepo() {
-
+    fun homeRepo() : Int {
+        return 0
     }
 
 }
