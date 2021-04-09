@@ -17,11 +17,4 @@ object RepositoryModule {
     fun userRepo(
         userDao: UserDao
     ) : UserRepo = UserRepoImpl(userDao)
-
-    @Provides
-    @Singleton
-    fun homeRepo() : Int {
-        return 0
-    }
-
 }
