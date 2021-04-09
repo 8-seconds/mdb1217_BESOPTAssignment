@@ -5,4 +5,5 @@
         android:startColor="@color/sky"
         android:endColor="@color/marin"
         android:type="linear"/>
+    <corners android:bottomLeftRadius="40dp"/>
 </shape>
