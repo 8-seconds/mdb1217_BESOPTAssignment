@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">AndroidAssignment</string>
+
+    <!--Sign In-->
+    <string name="login">로그인</string>
+    <string name="sopt">SOPT</string>
+    <string name="mdb1217">"mdb1217 "</string>
+    <string name="welcome_to">"Welcome to "</string>
+    <string name="profile">profile</string>
+    <string name="auto_login">자동로그인</string>
+    <string name="is_empty">빈 칸이 있습니다!</string>
+    <string name="welcome">"환영합니다! "</string>
+    <string name="sir">님</string>
+    <string name="auto_login_done">자동로그인 되었습니다</string>
+    <string name="not_match_id_password">아이디나 비밀번호가 맞지 않습니다!</string>
+
+    <!--Sign Up-->
     <string name="sign_up"><u>회원가입</u></string>
+    <string name="user_name">User name</string>
+    <string name="id">ID</string>
+    <string name="password">Password</string>
+    <string name="sign_up_no_line">회원가입</string>
+    <string name="sign_up_done">회원가입 완료!</string>
+    <string name="sign_up_logo">Sign Up</string>
+
 </resources>

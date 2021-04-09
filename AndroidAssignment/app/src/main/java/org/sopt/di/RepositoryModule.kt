@@ -4,6 +4,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.sopt.data.local.dao.UserDao
+import org.sopt.data.repository.UserRepo
+import org.sopt.data.repository.UserRepoImpl
 import javax.inject.Singleton
 
 @Module
@@ -11,9 +14,9 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun userRepo() : Int {
-        return 0
-    }
+    fun userRepo(
+        userDao: UserDao
+    ) : UserRepo = UserRepoImpl(userDao)
 
     @Provides
     @Singleton
