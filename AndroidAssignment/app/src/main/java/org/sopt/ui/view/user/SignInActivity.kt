@@ -1,5 +1,6 @@
 package org.sopt.ui.view.user
 
+import android.util.Log
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.R
@@ -14,7 +15,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
     override val viewModel: UserViewModel by viewModels()
 
     override fun initView() {
-
+        Log.d("hi", "안녕하세요")
     }
 
     override fun initBeforeBinding() {
