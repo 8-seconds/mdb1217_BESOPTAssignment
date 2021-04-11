@@ -13,7 +13,7 @@
         tools:context=".ui.view.MainActivity">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+            android:id="@+id/nsv_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
@@ -53,7 +53,7 @@
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_person_mint" />
+                        tools:background="@drawable/ic_person_mint" />
 
                     <TextView
                         android:id="@+id/tv_name"
