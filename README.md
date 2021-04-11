@@ -12,12 +12,11 @@
 [:one: First Week](#one-first-week)<br>
 [:two: Package Structure](#two-package-structure)<br>
 
-
-<br>
+---
 
 ## :zero: Specification
 
-<table class="tg">
+<table class="tag">
 <tbody>
   <tr>
     <td><b>Architecture</b></td>
@@ -43,6 +42,8 @@
     <td><b>Third Party Library</b></td>
 <td>Glide</td>
 </tr>
+</tbody>
+</table>
 
 <br>
 
@@ -253,7 +254,7 @@
 
   - 코드
 
-    ```kotlin
+```kotlin
     class LifeCycleLog(private val lifecycle: Lifecycle, private val className : String) : LifecycleObserver {
         init {
             lifecycle.addObserver(this)
@@ -264,7 +265,7 @@
             Log.d(className, lifecycle.currentState.toString())
         }
     }
-    ```
+```
 
 <br>
 
