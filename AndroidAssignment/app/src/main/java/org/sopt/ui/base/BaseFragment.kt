@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 
-open class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment(){
-    lateinit var binding: T
+open class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment(){
+    private var _binding: T? = null
+    private val binding get() = _binding!!
 
     open val layoutResourceId: Int = 0
 
@@ -38,8 +40,13 @@ open class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,layoutResourceId, container, false)
+        _binding = DataBindingUtil.inflate(inflater,layoutResourceId, container, false)
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

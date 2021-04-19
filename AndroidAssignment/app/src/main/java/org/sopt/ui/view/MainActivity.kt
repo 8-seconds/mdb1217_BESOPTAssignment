@@ -1,8 +1,6 @@
 package org.sopt.ui.view
 
-import android.app.Activity
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.R
 import org.sopt.databinding.ActivityMainBinding
@@ -17,13 +15,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeViewModel>() {
     override val viewModel: HomeViewModel by viewModels()
 
     override fun initView() {
-        setImage()
+        setResId()
         setAnim()
     }
 
-    private fun setImage() {
-        Glide.with(this).load(R.raw.gif_move_mint).circleCrop().into(binding.ivMintLogo)
-        Glide.with(this).load(R.drawable.img_dabin).circleCrop().into(binding.ivOwner)
+    private fun setResId() {
+        binding.logoResId = R.raw.gif_move_mint
+        binding.profileResId = R.drawable.img_dabin
     }
 
     private fun setAnim() {

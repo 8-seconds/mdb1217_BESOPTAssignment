@@ -6,7 +6,7 @@ import org.sopt.data.local.entity.UserData
 interface UserRepo {
     fun getAll(): LiveData<List<UserData>>
 
-    fun findPasswordById(id : String, password : String)
+    fun findPasswordById(id : String, password : String) : Boolean
 
     fun insert(userData : UserData)
 

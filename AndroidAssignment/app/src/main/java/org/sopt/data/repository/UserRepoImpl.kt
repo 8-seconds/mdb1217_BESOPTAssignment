@@ -9,26 +9,29 @@ import org.sopt.data.local.entity.UserData
 import javax.inject.Inject
 
 class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo {
+    companion object {
+        var isIdExist : Boolean = false
+    }
 
     override fun getAll(): LiveData<List<UserData>> {
         return userDao.getAll()
     }
 
-    override fun findPasswordById(id: String, password: String) {
+    override fun findPasswordById(id: String, password: String) : Boolean {
         runBlocking {
             val job = GlobalScope.launch {
                 try {
                     val userData = userDao.findPasswordById(id)
                     try {
                         if (userData.password == password) {
-                            setIdPasswordExist(true)
+                            isIdExist = true
                             setName(userData.name)
                         }
                         else {
-                            setIdPasswordExist(false)
+                            isIdExist = false
                         }
                     } catch (e: Exception) {
-                        setIdPasswordExist(false)
+                        isIdExist = false
                     }
                 } catch (e: Exception) {
 
@@ -36,6 +39,7 @@ class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo 
             }
             job.join()
         }
+        return isIdExist
     }
 
    override fun insert(userData: UserData) {

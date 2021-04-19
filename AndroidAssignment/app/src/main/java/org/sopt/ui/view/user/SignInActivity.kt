@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.R
 import org.sopt.data.local.SOPTSharedPreference.getAutoLogin
-import org.sopt.data.local.SOPTSharedPreference.getIdPasswordExist
 import org.sopt.data.local.SOPTSharedPreference.getName
 import org.sopt.data.local.SOPTSharedPreference.setAutoLogin
 import org.sopt.databinding.ActivitySignInBinding
@@ -22,7 +21,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
         get() = R.layout.activity_sign_in
     override val viewModel: UserViewModel by viewModels()
 
-    private val requestActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+    private val requestIdAndPassActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
         if(activityResult.resultCode == Activity.RESULT_OK) {
             val intent = activityResult.data
             if (intent != null) {
@@ -35,15 +34,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
             binding.etPassword.text.clear()
         }
 
-        when(isEtIdEmpty()) {
-            true -> setIdGray()
-            false -> setIdSky()
-        }
-
-        when(isEtPasswordEmpty()) {
-            true -> setPasswordGray()
-            false -> setPasswordSky()
-        }
+        binding.isIdExist = !isEtIdEmpty()
+        binding.isPassExist = !isEtPasswordEmpty()
     }
 
     override fun initView() {
@@ -55,19 +47,19 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
     private fun initFocusEvent() {
         binding.etId.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus)
-                setIdSky()
+                binding.isIdExist = true
             else {
                 if(isEtIdEmpty())
-                    setIdGray()
+                    binding.isIdExist = false
             }
         }
 
         binding.etPassword.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus)
-                setPasswordSky()
+                binding.isPassExist = true
             else {
                 if(isEtPasswordEmpty())
-                   setPasswordGray()
+                   binding.isPassExist = false
             }
         }
     }
@@ -77,12 +69,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
             val id = binding.etId.text.toString()
             val password = binding.etPassword.text.toString()
 
-            viewModel.findPasswordById(id, password)
-
             if(isEtIdEmpty() || isEtPasswordEmpty())
                 shortToast(getString(R.string.is_empty))
             else {
-                if(getIdPasswordExist()) {
+                if(viewModel.findPasswordById(id, password)) {
                     shortToast(getString(R.string.welcome) + getName() + getString(R.string.sir))
                     setAutoLogin(binding.ibCheckBox.isSelected)
                     startActivity(Intent(this@SignInActivity, MainActivity::class.java))
@@ -97,7 +87,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
         }
 
         binding.tvSignUp.setOnClickListener {
-            requestActivity.launch(Intent(this@SignInActivity, SignUpActivity::class.java))
+            requestIdAndPassActivity.launch(Intent(this@SignInActivity, SignUpActivity::class.java))
         }
     }
 
@@ -108,31 +98,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
         }
     }
 
-    private fun setIdSky() {
-        binding.clId.setBackgroundResource(R.drawable.rectangle_border_sky_10)
-        binding.ivMail.setBackgroundResource(R.drawable.ic_baseline_mail_sky)
-    }
+    private fun isEtIdEmpty() : Boolean = binding.etId.text.isNullOrEmpty()
 
-    private fun setIdGray() {
-        binding.clId.setBackgroundResource(R.drawable.rectangle_fill_gray_10)
-        binding.ivMail.setBackgroundResource(R.drawable.ic_baseline_mail)
-    }
-
-    private fun setPasswordSky() {
-        binding.clPassword.setBackgroundResource(R.drawable.rectangle_border_sky_10)
-        binding.ivLock.setBackgroundResource(R.drawable.ic_lock_sky)
-    }
-
-    private fun setPasswordGray() {
-        binding.clPassword.setBackgroundResource(R.drawable.rectangle_fill_gray_10)
-        binding.ivLock.setBackgroundResource(R.drawable.ic_lock)
-    }
-
-    private fun isEtIdEmpty() : Boolean {
-        return binding.etId.text.isNullOrEmpty()
-    }
-
-    private fun isEtPasswordEmpty() : Boolean {
-        return binding.etPassword.text.isNullOrEmpty()
-    }
+    private fun isEtPasswordEmpty() : Boolean = binding.etPassword.text.isNullOrEmpty()
 }

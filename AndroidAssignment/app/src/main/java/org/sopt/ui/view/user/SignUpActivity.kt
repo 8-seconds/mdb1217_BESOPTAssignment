@@ -25,28 +25,28 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding, UserViewModel>() {
     private fun initFocusEvent() {
         binding.etName.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus)
-                binding.clUserName.setBackgroundResource(R.drawable.rectangle_border_sky_10)
+                binding.isNameExist = true
             else {
                 if(isEtNameEmpty())
-                    binding.clUserName.setBackgroundResource(R.drawable.rectangle_border_gray_10)
+                    binding.isNameExist = false
             }
         }
 
         binding.etId.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus)
-                binding.clId.setBackgroundResource(R.drawable.rectangle_border_sky_10)
+                binding.isEmailExist = true
             else {
                 if(isEtIdEmpty())
-                    binding.clId.setBackgroundResource(R.drawable.rectangle_border_gray_10)
+                    binding.isEmailExist = false
             }
         }
 
         binding.etPassword.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus)
-                binding.clPassword.setBackgroundResource(R.drawable.rectangle_border_sky_10)
+                binding.isPassExist = true
             else {
-                if(isEtPassword())
-                    binding.clPassword.setBackgroundResource(R.drawable.rectangle_border_gray_10)
+                if(isEtPasswordEmpty())
+                    binding.isPassExist = false
             }
         }
     }
@@ -72,21 +72,13 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding, UserViewModel>() {
         }
     }
 
-    private fun isAllEditTextEmpty() : Boolean {
-         return isEtNameEmpty() || isEtIdEmpty() || isEtPassword()
-    }
+    private fun isAllEditTextEmpty() : Boolean = isEtNameEmpty() || isEtIdEmpty() || isEtPasswordEmpty()
 
-    private fun isEtNameEmpty() : Boolean {
-        return binding.etName.text.isNullOrEmpty()
-    }
+    private fun isEtNameEmpty() : Boolean = binding.etName.text.isNullOrEmpty()
 
-    private fun isEtIdEmpty() : Boolean {
-        return binding.etId.text.isNullOrEmpty()
-    }
+    private fun isEtIdEmpty() : Boolean = binding.etId.text.isNullOrEmpty()
 
-    private fun isEtPassword() : Boolean {
-        return binding.etPassword.text.isNullOrEmpty()
-    }
+    private fun isEtPasswordEmpty() : Boolean = binding.etPassword.text.isNullOrEmpty()
 
     override fun onBackPressed() {
         super.onBackPressed()
