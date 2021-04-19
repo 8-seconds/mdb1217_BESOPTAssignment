@@ -4,13 +4,184 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable name="isNameExist" type="Boolean" />
+        <variable name="isEmailExist" type="Boolean" />
+        <variable name="isPassExist" type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.view.user.SignUpActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/rectangle_fill_blue_sky_40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_mouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_mouse" />
+
+            <TextView
+                android:id="@+id/tv_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/sign_up_logo"
+                android:textColor="@color/ocean_green"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mouse" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="20dp"
+            android:background="@{isNameExist? @drawable/rectangle_border_sky_10 : @drawable/rectangle_border_gray_10}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:background="@drawable/rectangle_border_gray_10">
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/user_name"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_person"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/ic_person_mint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="@{isEmailExist? @drawable/rectangle_border_sky_10 : @drawable/rectangle_border_gray_10}"
+            app:layout_constraintEnd_toEndOf="@+id/cl_user_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/cl_user_name"
+            app:layout_constraintTop_toBottomOf="@+id/cl_user_name"
+            tools:background="@drawable/rectangle_border_gray_10">
+
+            <ImageView
+                android:id="@+id/iv_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/ic_baseline_mail_mint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:imeOptions="actionNext"
+                android:hint="@string/id"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_mail"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="@{isPassExist? @drawable/rectangle_border_sky_10 : @drawable/rectangle_border_gray_10}"
+            app:layout_constraintEnd_toEndOf="@+id/cl_id"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/cl_id"
+            app:layout_constraintTop_toBottomOf="@+id/cl_id"
+            tools:background="@drawable/rectangle_border_gray_10">
+
+            <ImageView
+                android:id="@+id/iv_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/ic_lock_mint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_lock"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rectangle_fill_sky_15"
+            android:text="@string/sign_up_no_line"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_password" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

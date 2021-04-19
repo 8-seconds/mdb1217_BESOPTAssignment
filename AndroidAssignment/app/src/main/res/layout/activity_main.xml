@@ -4,13 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable name="profileResId" type="Integer" />
+        <variable name="logoResId" type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.view.MainActivity">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_fill_blue_sky">
+
+                <ImageView
+                    android:id="@+id/iv_mint_logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    app:imgResId="@{logoResId}"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:background="@drawable/ic_person_mint" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/rectangle_fill_white_30"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_mint_logo">
+
+                    <ImageView
+                        android:id="@+id/iv_owner"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="40dp"
+                        app:imgResId="@{profileResId}"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:background="@drawable/ic_person_mint" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/name"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/iv_owner"
+                        app:layout_constraintTop_toTopOf="@+id/iv_owner" />
+
+                    <TextView
+                        android:id="@+id/tv_git"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/git"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="0dp"
+                        android:layout_height="2px"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/ocean_green"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_owner" />
+
+                    <TextView
+                        android:id="@+id/tv_welcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/welcome_to_my_profile"
+                        android:textColor="@color/ocean_green"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                    <TextView
+                        android:id="@+id/tv_introduce"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/introduce"
+                        android:padding="35dp"
+                        android:textSize="17sp"
+                        android:textColor="@color/ocean_green"
+                        android:textStyle="bold"
+                        android:background="@drawable/rectangle_border_sky_10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

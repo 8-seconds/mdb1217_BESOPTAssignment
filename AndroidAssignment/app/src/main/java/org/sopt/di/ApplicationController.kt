@@ -2,6 +2,7 @@ package org.sopt.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import org.sopt.data.local.SOPTSharedPreference
 
 @HiltAndroidApp
 class ApplicationController : Application() {
@@ -12,5 +13,6 @@ class ApplicationController : Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+        SOPTSharedPreference.init(applicationContext)
     }
 }
