@@ -2,17 +2,12 @@ package org.sopt.data.repository
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.*
-import org.sopt.data.local.SOPTSharedPreference.setIdPasswordExist
 import org.sopt.data.local.SOPTSharedPreference.setName
 import org.sopt.data.local.dao.UserDao
 import org.sopt.data.local.entity.UserData
 import javax.inject.Inject
 
 class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo {
-    companion object {
-        var isIdExist : Boolean = false
-    }
-
     override fun getAll(): LiveData<List<UserData>> {
         return userDao.getAll()
     }
@@ -24,14 +19,14 @@ class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo 
                     val userData = userDao.findPasswordById(id)
                     try {
                         if (userData.password == password) {
-                            isIdExist = true
+                            isIdPassExist = true
                             setName(userData.name)
                         }
                         else {
-                            isIdExist = false
+                            isIdPassExist = false
                         }
                     } catch (e: Exception) {
-                        isIdExist = false
+                        isIdPassExist = false
                     }
                 } catch (e: Exception) {
 
@@ -39,7 +34,7 @@ class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo 
             }
             job.join()
         }
-        return isIdExist
+        return isIdPassExist
     }
 
    override fun insert(userData: UserData) {
@@ -56,5 +51,9 @@ class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo 
                 userDao.delete(userData)
             }
         } catch(e: Exception) { }
+    }
+
+    companion object {
+        var isIdPassExist : Boolean = false
     }
 }

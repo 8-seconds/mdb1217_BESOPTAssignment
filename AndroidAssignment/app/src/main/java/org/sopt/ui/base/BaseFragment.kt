@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 
 open class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment(){
     private var _binding: T? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     open val layoutResourceId: Int = 0
 
