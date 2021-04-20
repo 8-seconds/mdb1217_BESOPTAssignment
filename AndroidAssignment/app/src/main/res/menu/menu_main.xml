@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_person_gray"
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/menu_star"
+        android:icon="@drawable/ic_star"
+        android:title="@string/star" />
+
+    <item
+        android:id="@+id/menu_contribute"
+        android:icon="@drawable/ic_conversation"
+        android:title="@string/contribute" />
+</menu>
