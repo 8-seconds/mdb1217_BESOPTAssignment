@@ -75,7 +75,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
                 if(viewModel.findPasswordById(id, password)) {
                     shortToast(getString(R.string.welcome) + getName() + getString(R.string.sir))
                     setAutoLogin(binding.ibCheckBox.isSelected)
-                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                    startMainActivity()
                 }
                 else
                     shortToast(getString(R.string.not_match_id_password))
@@ -94,11 +94,16 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
     private fun autoLogin() {
         if(getAutoLogin()) {
             shortToast(getString(R.string.auto_login_done))
-            startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+            startMainActivity()
         }
     }
 
     private fun isEtIdEmpty() : Boolean = binding.etId.text.isNullOrEmpty()
 
     private fun isEtPasswordEmpty() : Boolean = binding.etPassword.text.isNullOrEmpty()
+
+    private fun startMainActivity() {
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+        finish()
+    }
 }

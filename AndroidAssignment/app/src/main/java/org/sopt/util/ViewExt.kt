@@ -9,4 +9,4 @@ fun Context.shortToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.setFadeInAnim(id : Int): Animation? = AnimationUtils.loadAnimation(this, id)
+fun setFadeInAnim(context: Context, id : Int): Animation? = AnimationUtils.loadAnimation(context, id)
