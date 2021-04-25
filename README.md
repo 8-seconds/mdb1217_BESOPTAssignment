@@ -2,7 +2,7 @@
 
 [![WrittenBy](https://img.shields.io/badge/Written%20by-mdb1217-white.svg)](https://github.com/mdb1217)
 
-:calendar: **Last Edited : `2021. 04. 11`**
+:calendar: **Last Edited : `2021. 04. 25`**
 
 <br>
 
@@ -10,7 +10,8 @@
 
 [:zero: Specification](#zero-specification)<br>
 [:one: First Week](#one-first-week)<br>
-[:two: Package Structure](#two-package-structure)<br>
+[:two: Second Week](#two-second-week)<br>
+[:three: Package Structure](#three-package-structure)<br>
 
 ---
 
@@ -345,7 +346,85 @@
 
 <br>
 
-## :two: Package Structure
+## :two: Second Week
+
+<table class="tg">
+<tbody>
+    <tr>
+      <td><b>RecyclerView</b></td>
+    </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/70698151/115997831-93df1600-a61f-11eb-879e-6864f3acb8b1.png" width="200px"/></td>
+    </tr>
+</tbody>
+</table>
+
+<br>
+
+#### 1. Level 1 :baby:
+
+- ##### profile fragment
+
+  - **Recycler Adapter and ViewHolder**
+
+    ```kotlin
+    private val _data = mutableListOf<ProfileData>()
+    var data : List<ProfileData> = _data
+        set(value) {
+            _data.clear()
+            _data.addAll(value)
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
+        val binding: ItemDetailedProfileBinding = ItemDetailedProfileBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent, false)
+
+        return ProfileViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
+        holder.bind(_data[position])
+    }
+
+    fun setTodoList(list: List<ProfileData>) {
+        data = list.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = _data.size
+
+    class ProfileViewHolder(private val binding: ItemDetailedProfileBinding) :
+            RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(profileData: ProfileData) {
+            binding.profileData = profileData
+        }
+    }
+    ```
+
+#### 2. Level 2 :baby:
+
+**onItemTouchHealper 이용해서 swipe 와 move 구현**
+```kotlin
+    override fun onItemMoved(from: Int, to: Int) {
+        if (from == to) {
+            return
+        }
+
+        val fromItem = data.removeAt(from)
+        data.add(to, fromItem)
+        notifyItemMoved(from, to)
+    }
+
+    override fun onItemSwiped(position: Int) {
+        data.removeAt(position)
+        notifyItemRemoved(position)
+    }
+    ```
+
+## :three: Package Structure
 
 ```
 📦 org.sopt
