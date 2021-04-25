@@ -422,7 +422,7 @@
         data.removeAt(position)
         notifyItemRemoved(position)
     }
-    ```
+```
 
 ## :three: Package Structure
 
