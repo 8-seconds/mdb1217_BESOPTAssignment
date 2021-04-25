@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable name="title" type="String" />
+        <variable name="title" type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +16,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_main"
             android:layout_width="match_parent"
+            android:background="@color/white"
+            android:elevation="4dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/rectangle_fill_blue_sky"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/menu_setting"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
                 android:text="@{title ?? @string/profile_korea}"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/marin"
                 android:layout_gravity="center"
                 tools:text="타이틀"/>
 

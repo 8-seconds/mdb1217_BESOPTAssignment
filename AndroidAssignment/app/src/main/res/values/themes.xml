@@ -22,4 +22,9 @@
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10sp</item>
     </style>
+
+    <!-- CustomDialog -->
+    <style name="DialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@drawable/rectangle_fill_white_10</item>
+    </style>
 </resources>
