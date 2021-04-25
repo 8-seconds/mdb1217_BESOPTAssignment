@@ -10,5 +10,36 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.MainActivity"/>
+        tools:context=".ui.view.MainActivity">
+
+        <ImageButton
+            android:id="@+id/ib_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/selector_grid"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_linear"
+            app:layout_constraintStart_toEndOf="@+id/ib_linear" />
+
+        <ImageButton
+            android:id="@+id/ib_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/selector_linear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ib_linear" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
