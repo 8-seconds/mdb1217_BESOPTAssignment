@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import org.sopt.data.local.entity.ProfileData
 import org.sopt.databinding.ItemDetailedProfileBinding
 
-class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.ProfileViewHolder>(){
+class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.ProfileViewHolder>() {
+    private var deleteButtonClickListener: ((ProfileData)-> Unit) ?= null
     private val _data = mutableListOf<ProfileData>()
     var data : List<ProfileData> = _data
         set(value) {
@@ -14,6 +15,10 @@ class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.ProfileViewHo
             _data.addAll(value)
             notifyDataSetChanged()
         }
+
+    fun setDeleteButtonClickListener(listener : (ProfileData)-> Unit) {
+        this.deleteButtonClickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         val binding: ItemDetailedProfileBinding = ItemDetailedProfileBinding.inflate(
@@ -27,18 +32,16 @@ class ProfileListAdapter : RecyclerView.Adapter<ProfileListAdapter.ProfileViewHo
         holder.bind(_data[position])
     }
 
-    fun setTodoList(list: List<ProfileData>) {
-        data = list.toMutableList()
-        notifyDataSetChanged()
-    }
-
     override fun getItemCount(): Int = _data.size
 
-    class ProfileViewHolder(private val binding: ItemDetailedProfileBinding) :
+    inner class ProfileViewHolder(private val binding: ItemDetailedProfileBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
         fun bind(profileData: ProfileData) {
-            binding.profileData = profileData
+            binding.apply {
+                this.profileData = profileData
+                ibDelete.setOnClickListener { deleteButtonClickListener?.invoke(profileData) }
+            }
         }
     }
 }
