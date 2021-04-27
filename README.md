@@ -403,23 +403,84 @@
         }
     }
     ```
+    
+ <br>
+    
+ - **Elipsize and MaxLine 통해 text의 size 조절**
+
+    ```xml
+    <TextView
+                android:id="@+id/tv_repo_explanation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{repoData.explanation}"
+                android:textColor="@color/ocean_green"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_type"
+                app:layout_constraintStart_toStartOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/line"
+                tools:text="@string/content" />
+
+    <TextView
+            android:id="@+id/tv_title_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/title"
+            android:textColor="@color/ocean_green"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    ```
+<br>
+
+ - **ViewPager2 통해서 fragment 띄워주기(Level 1-3 버튼대신 뷰페이저 이용)**
+ 
+
+    ```kotlin
+    class MainViewPagerAdapter(activity: MainActivity) : FragmentStateAdapter(activity) {
+    	var fragmentList = listOf<Fragment>()
+
+    	override fun getItemCount(): Int {
+        	return fragmentList.count()
+    	}
+
+    	override fun createFragment(position: Int): Fragment = fragmentList[position]
+	}
+	```
+
 
 #### 2. Level 2 :baby:
 
-**onItemTouchHealper 이용해서 swipe 와 move 구현**
+**Grid Layout**
+```xml
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_detailed_profile" />
+```
+
+**ItemTouchHealper 이용해서 swipe로 삭제 기능 구현**
 ```kotlin
-    override fun onItemMoved(from: Int, to: Int) {
-        if (from == to) {
-            return
-        }
-
-        val fromItem = data.removeAt(from)
-        data.add(to, fromItem)
-        notifyItemMoved(from, to)
-    }
-
     override fun onItemSwiped(position: Int) {
-        data.removeAt(position)
+        dataSwipeListener?.invoke(_data[position])
+        _data.removeAt(position)
         notifyItemRemoved(position)
     }
 ```
