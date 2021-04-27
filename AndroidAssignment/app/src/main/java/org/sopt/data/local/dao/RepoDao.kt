@@ -12,6 +12,12 @@ interface RepoDao {
     @Query("SELECT * FROM Repo_data_table")
     fun getAll(): LiveData<List<RepoData>>
 
+    @Query("SELECT * FROM Repo_data_table WHERE star = 1")
+    fun getStaredRepo(): LiveData<List<RepoData>>
+
+    @Query("UPDATE repo_data_table SET star = :isSelected WHERE id =:id")
+    fun updateStar(isSelected : Int, id : Long)
+
     @Insert
     fun insert(userData: RepoData)
 

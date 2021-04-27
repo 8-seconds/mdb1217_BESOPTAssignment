@@ -13,5 +13,8 @@ data class ProfileData(
         val title: String,
 
         @ColumnInfo(name = "explanation")
-        val explanation: String
+        val explanation: String,
+
+        @ColumnInfo(name = "date")
+        val date: String
 )

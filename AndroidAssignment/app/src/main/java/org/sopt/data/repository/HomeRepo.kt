@@ -13,6 +13,10 @@ interface HomeRepo {
 
     fun getRepoDataAll(): LiveData<List<RepoData>>
 
+    fun getStaredRepo(): LiveData<List<RepoData>>
+
+    fun updateStar(isSelected : Int, id : Long)
+
     fun insertRepoData(repoData : RepoData)
 
     fun deleteRepoData(repoData : RepoData)

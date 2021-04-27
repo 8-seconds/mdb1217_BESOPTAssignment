@@ -30,6 +30,16 @@ class HomeRepoImpl@Inject constructor(private val profileDao: ProfileDao, privat
     
     override fun getRepoDataAll(): LiveData<List<RepoData>> = repoDao.getAll()
 
+    override fun getStaredRepo(): LiveData<List<RepoData>> = repoDao.getStaredRepo()
+
+    override fun updateStar(isSelected: Int, id: Long) {
+        try {
+            GlobalScope.launch {
+                repoDao.updateStar(isSelected, id)
+            }
+        } catch(e: Exception) { }
+    }
+
     override fun insertRepoData(repoData: RepoData) {
         try {
             GlobalScope.launch {
