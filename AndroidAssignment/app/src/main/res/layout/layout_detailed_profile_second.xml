@@ -9,41 +9,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_profile_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            tools:orientation="horizontal"
-            tools:listitem="@layout/item_detailed_profile"/>
-
-        <ImageButton
-            android:id="@+id/ib_pencil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_pencil"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_add"
-            app:layout_constraintEnd_toStartOf="@+id/tv_add"
-            app:layout_constraintTop_toTopOf="@+id/tv_add" />
-
-        <TextView
-            android:id="@+id/tv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="30dp"
-            android:text="@string/add"
-            android:textColor="@color/white_gray"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_profile_list" />
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_detailed_profile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

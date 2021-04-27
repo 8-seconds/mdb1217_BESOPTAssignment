@@ -15,9 +15,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rectangle_border_gray_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,20 +45,24 @@
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ib_star"
-                tools:text="@string/title"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/title" />
 
             <TextView
                 android:id="@+id/tv_repo_explanation"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{repoData.explanation}"
                 android:textColor="@color/ocean_green"
                 android:textSize="16sp"
-                android:text="@{repoData.explanation}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_type"
                 app:layout_constraintStart_toStartOf="@+id/line"
                 app:layout_constraintTop_toBottomOf="@+id/line"
                 tools:text="@string/content" />
@@ -66,23 +72,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:textSize="12sp"
-                android:textStyle="bold"
                 android:text="@{repoData.language}"
                 android:textColor="@color/white_gray"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_repo_name"
                 app:layout_constraintStart_toEndOf="@+id/tv_repo_name"
-                tools:text="@string/language"/>
+                tools:text="@string/language" />
 
             <ImageView
                 android:id="@+id/iv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="18dp"
+                app:imgType="@{repoData.type}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:background="@drawable/ic_pencil" />
+                tools:background="@drawable/ic_bulb_mint" />
 
             <ImageView
                 android:id="@+id/line"
