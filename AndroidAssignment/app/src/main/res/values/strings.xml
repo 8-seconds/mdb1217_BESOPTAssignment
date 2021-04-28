@@ -58,6 +58,7 @@
 
     <!--Star-->
     <string name="favorites">즐겨찾기</string>
+    <string name="starred_repo">Starred Repo!</string>
 
     <!--Contribute-->
     <string name="grass">잔디밭</string>
