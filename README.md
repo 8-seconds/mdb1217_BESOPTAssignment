@@ -29,7 +29,7 @@
 </tr>
 <tr>
     <td><b>Jetpack Components</b></td>
-<td>DataBinding, LiveData, ViewModel, Lifecycle, Room</td>
+<td>DataBinding, LiveData, ViewModel, Lifecycle, Room, ViewPager2, CardView</td>
 </tr>
 <tr>
   <tr>
@@ -41,7 +41,7 @@
 </tr>
 <tr>
     <td><b>Third Party Library</b></td>
-<td>Glide</td>
+<td>Glide, Expandable Layout</td>
 </tr>
 </tbody>
 </table>
@@ -352,9 +352,15 @@
 <tbody>
     <tr>
       <td><b>RecyclerView</b></td>
+	<td><b>ViewPager + RecyclerAdapter</b></td>
+	<td><b>Custom Dialog</b></td>
+	<td><b>Custom Dialog2</b></td>
     </tr>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/70698151/115997831-93df1600-a61f-11eb-879e-6864f3acb8b1.png" width="200px"/></td>
+    <td><img src="https://user-images.githubusercontent.com/70698151/116193790-dc571a80-a76a-11eb-9e72-48cbf3950fec.gif" width="200px"/></td>
+	<td><img src="https://user-images.githubusercontent.com/70698151/116399564-07716500-a864-11eb-9573-14b6b425a6dc.gif" width="200px"/></td>
+	<td><img src="https://user-images.githubusercontent.com/70698151/116403108-24a83280-a868-11eb-9c38-62d6708c01e8.png" width="200px"/></td>
+	<td><img src="https://user-images.githubusercontent.com/70698151/116403119-27a32300-a868-11eb-9a62-5522a5c5778f.png" width="200px"/></td>
     </tr>
 </tbody>
 </table>
@@ -455,7 +461,7 @@
     	}
 
     	override fun createFragment(position: Int): Fragment = fragmentList[position]
-	}
+}
 	```
 
 
