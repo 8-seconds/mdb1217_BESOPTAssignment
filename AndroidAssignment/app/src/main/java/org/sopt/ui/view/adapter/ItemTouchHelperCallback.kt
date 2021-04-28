@@ -10,13 +10,12 @@ class ItemTouchHelperCallback(private val listener: ItemTouchHelperListener) : I
     }
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        val dragFlag = ItemTouchHelper.DOWN or ItemTouchHelper.UP or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         val swipeFlag = ItemTouchHelper.START or ItemTouchHelper.END
-        return makeMovementFlags(dragFlag, swipeFlag)
+        return makeMovementFlags(0, swipeFlag)
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     override fun isLongPressDragEnabled(): Boolean = true
