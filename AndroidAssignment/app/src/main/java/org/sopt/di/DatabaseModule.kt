@@ -10,9 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import org.sopt.data.local.dao.ProfileDao
 import org.sopt.data.local.dao.RepoDao
 import org.sopt.data.local.dao.UserDao
-import org.sopt.data.local.database.ProfileDatabase
-import org.sopt.data.local.database.RepoDatabase
-import org.sopt.data.local.database.UserDatabase
+import org.sopt.data.local.database.LocalDatabase
 import javax.inject.Singleton
 
 @Module
@@ -20,43 +18,23 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideUserDatabase(@ApplicationContext context: Context): UserDatabase =
+    fun provideLocalDatabase(@ApplicationContext context: Context): LocalDatabase =
         Room.databaseBuilder(
-            context.applicationContext,
-            UserDatabase::class.java,
-            "user database"
+            context,
+            LocalDatabase::class.java,
+            "local database"
         ).fallbackToDestructiveMigration()
             .build()
 
     @Provides
-    fun provideUserDao(database: UserDatabase): UserDao =
+    fun provideUserDao(database: LocalDatabase): UserDao =
             database.userDao
 
     @Provides
-    @Singleton
-    fun provideProfileDatabase(@ApplicationContext context: Context): ProfileDatabase =
-            Room.databaseBuilder(
-                    context.applicationContext,
-                    ProfileDatabase::class.java,
-                    "profile database"
-            ).fallbackToDestructiveMigration()
-                    .build()
-
-    @Provides
-    fun provideProfileDao(database: ProfileDatabase): ProfileDao =
+    fun provideProfileDao(database: LocalDatabase): ProfileDao =
             database.profileDao
 
     @Provides
-    @Singleton
-    fun provideRepoDatabase(@ApplicationContext context: Context): RepoDatabase =
-            Room.databaseBuilder(
-                    context.applicationContext,
-                    RepoDatabase::class.java,
-                    "repo database"
-            ).fallbackToDestructiveMigration()
-                    .build()
-
-    @Provides
-    fun provideRepoDao(database: RepoDatabase): RepoDao =
+    fun provideRepoDao(database: LocalDatabase): RepoDao =
             database.repoDao
 }

@@ -14,7 +14,7 @@ class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo 
 
     override fun findPasswordById(id: String, password: String) : Boolean {
         runBlocking {
-            val job = GlobalScope.launch {
+            val job = CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val userData = userDao.findPasswordById(id)
                     try {
@@ -39,15 +39,15 @@ class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo 
 
    override fun insert(userData: UserData) {
         try {
-           GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                userDao.insert(userData)
-           }
+            }
         } catch(e: Exception) { }
     }
 
     override fun delete(userData: UserData) {
         try {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 userDao.delete(userData)
             }
         } catch(e: Exception) { }

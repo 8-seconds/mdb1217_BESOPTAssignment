@@ -1,6 +1,8 @@
 package org.sopt.data.repository
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.sopt.data.local.dao.ProfileDao
@@ -14,7 +16,7 @@ class HomeRepoImpl@Inject constructor(private val profileDao: ProfileDao, privat
 
     override fun insertProfileData(profileData: ProfileData) {
         try {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 profileDao.insert(profileData)
             }
         } catch(e: Exception) { }
@@ -22,7 +24,7 @@ class HomeRepoImpl@Inject constructor(private val profileDao: ProfileDao, privat
     
     override fun deleteProfileData(profileData: ProfileData) {
         try {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 profileDao.delete(profileData)
             }
         } catch(e: Exception) { }
@@ -34,7 +36,7 @@ class HomeRepoImpl@Inject constructor(private val profileDao: ProfileDao, privat
 
     override fun updateStar(isSelected: Int, id: Long) {
         try {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 repoDao.updateStar(isSelected, id)
             }
         } catch(e: Exception) { }
@@ -42,7 +44,7 @@ class HomeRepoImpl@Inject constructor(private val profileDao: ProfileDao, privat
 
     override fun insertRepoData(repoData: RepoData) {
         try {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 repoDao.insert(repoData)
             }
         } catch(e: Exception) { }
@@ -50,7 +52,7 @@ class HomeRepoImpl@Inject constructor(private val profileDao: ProfileDao, privat
 
     override fun deleteRepoData(repoData: RepoData) {
         try {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 repoDao.delete(repoData)
             }
         } catch(e: Exception) { }
