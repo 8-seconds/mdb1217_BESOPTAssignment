@@ -2,7 +2,7 @@
 
 [![WrittenBy](https://img.shields.io/badge/Written%20by-mdb1217-white.svg)](https://github.com/mdb1217)
 
-:calendar: **Last Edited : `2021. 04. 25`**
+:calendar: **Last Edited : `2021. 05. 13`**
 
 <br>
 
@@ -452,7 +452,7 @@
  - **ViewPager2 통해서 fragment 띄워주기(Level 1-3 버튼대신 뷰페이저 이용)**
  
 
-    ```kotlin
+```kotlin
     class MainViewPagerAdapter(activity: MainActivity) : FragmentStateAdapter(activity) {
     	var fragmentList = listOf<Fragment>()
 
@@ -460,14 +460,14 @@
         	return fragmentList.count()
     	}
 
-    	override fun createFragment(position: Int): Fragment = fragmentList[position]
-}
-	```
+    	override fun createFragment(position: Int): Fragment = fragmentList[position]}
+```
 
+<br>
 
-#### 2. Level 2 :baby:
+#### 2. Level 2 👧​
 
-**Grid Layout**
+- **Grid Layout**
 ```xml
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_profile_list"
@@ -482,7 +482,9 @@
             tools:listitem="@layout/item_detailed_profile" />
 ```
 
-**ItemTouchHealper 이용해서 swipe로 삭제 기능 구현**
+<br>
+
+- **ItemTouchHealper 이용해서 swipe로 삭제 기능 구현**
 ```kotlin
     override fun onItemSwiped(position: Int) {
         dataSwipeListener?.invoke(_data[position])
@@ -490,6 +492,8 @@
         notifyItemRemoved(position)
     }
 ```
+
+<br>
 
 ## :three: Package Structure
 
