@@ -2,7 +2,7 @@
 
 [![WrittenBy](https://img.shields.io/badge/Written%20by-mdb1217-white.svg)](https://github.com/mdb1217)
 
-:calendar: **Last Edited : `2021. 04. 11`**
+:calendar: **Last Edited : `2021. 05. 13`**
 
 <br>
 
@@ -10,7 +10,8 @@
 
 [:zero: Specification](#zero-specification)<br>
 [:one: First Week](#one-first-week)<br>
-[:two: Package Structure](#two-package-structure)<br>
+[:two: Second Week](#two-second-week)<br>
+[:three: Package Structure](#three-package-structure)<br>
 
 ---
 
@@ -28,7 +29,7 @@
 </tr>
 <tr>
     <td><b>Jetpack Components</b></td>
-<td>DataBinding, LiveData, ViewModel, Lifecycle, Room</td>
+<td>DataBinding, LiveData, ViewModel, Lifecycle, Room, ViewPager2, CardView</td>
 </tr>
 <tr>
   <tr>
@@ -40,7 +41,7 @@
 </tr>
 <tr>
     <td><b>Third Party Library</b></td>
-<td>Glide</td>
+<td>Glide, Expandable Layout</td>
 </tr>
 </tbody>
 </table>
@@ -345,7 +346,156 @@
 
 <br>
 
-## :two: Package Structure
+## :two: Second Week
+
+<table class="tg">
+<tbody>
+    <tr>
+      <td><b>RecyclerView</b></td>
+	<td><b>ViewPager + RecyclerAdapter</b></td>
+	<td><b>Custom Dialog</b></td>
+	<td><b>Custom Dialog2</b></td>
+    </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/70698151/116193790-dc571a80-a76a-11eb-9e72-48cbf3950fec.gif" width="200px"/></td>
+	<td><img src="https://user-images.githubusercontent.com/70698151/116399564-07716500-a864-11eb-9573-14b6b425a6dc.gif" width="200px"/></td>
+	<td><img src="https://user-images.githubusercontent.com/70698151/116403108-24a83280-a868-11eb-9c38-62d6708c01e8.png" width="200px"/></td>
+	<td><img src="https://user-images.githubusercontent.com/70698151/116403119-27a32300-a868-11eb-9a62-5522a5c5778f.png" width="200px"/></td>
+    </tr>
+</tbody>
+</table>
+
+<br>
+
+#### 1. Level 1 :baby:
+
+- ##### profile fragment
+
+  - **Recycler Adapter and ViewHolder**
+
+    ```kotlin
+    private val _data = mutableListOf<ProfileData>()
+    var data : List<ProfileData> = _data
+        set(value) {
+            _data.clear()
+            _data.addAll(value)
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
+        val binding: ItemDetailedProfileBinding = ItemDetailedProfileBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent, false)
+
+        return ProfileViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
+        holder.bind(_data[position])
+    }
+
+    fun setTodoList(list: List<ProfileData>) {
+        data = list.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = _data.size
+
+    class ProfileViewHolder(private val binding: ItemDetailedProfileBinding) :
+            RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(profileData: ProfileData) {
+            binding.profileData = profileData
+        }
+    }
+    ```
+    
+ <br>
+    
+ - **Elipsize and MaxLine 통해 text의 size 조절**
+
+    ```xml
+    <TextView
+                android:id="@+id/tv_repo_explanation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{repoData.explanation}"
+                android:textColor="@color/ocean_green"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_type"
+                app:layout_constraintStart_toStartOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/line"
+                tools:text="@string/content" />
+
+    <TextView
+            android:id="@+id/tv_title_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/title"
+            android:textColor="@color/ocean_green"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    ```
+<br>
+
+ - **ViewPager2 통해서 fragment 띄워주기(Level 1-3 버튼대신 뷰페이저 이용)**
+ 
+
+```kotlin
+    class MainViewPagerAdapter(activity: MainActivity) : FragmentStateAdapter(activity) {
+    	var fragmentList = listOf<Fragment>()
+
+    	override fun getItemCount(): Int {
+        	return fragmentList.count()
+    	}
+
+    	override fun createFragment(position: Int): Fragment = fragmentList[position]}
+```
+
+<br>
+
+#### 2. Level 2 👧​
+
+- **Grid Layout**
+```xml
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_detailed_profile" />
+```
+
+<br>
+
+- **ItemTouchHealper 이용해서 swipe로 삭제 기능 구현**
+```kotlin
+    override fun onItemSwiped(position: Int) {
+        dataSwipeListener?.invoke(_data[position])
+        _data.removeAt(position)
+        notifyItemRemoved(position)
+    }
+```
+
+<br>
+
+## :three: Package Structure
 
 ```
 📦 org.sopt

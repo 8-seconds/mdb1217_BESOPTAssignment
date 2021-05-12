@@ -23,9 +23,46 @@
     <string name="sign_up_done">회원가입 완료!</string>
     <string name="sign_up_logo">Sign Up</string>
 
-    <!--Main-->
+    <!--Profile-->
     <string name="name">이름 : 문다빈</string>
-    <string name="git">Git ID : mdb1217</string>
+    <string name="repository_add">레포지토리 추가</string>
+    <string name="repository_name">레포 이름</string>
+    <string name="repository_explanation">레포 설명</string>
+    <string name="repository_specification">레포 종류</string>
+    <string name="study">study</string>
+    <string name="project">project</string>
+    <string name="information">info</string>
+    <string name="git_id">mdb1217</string>
     <string name="welcome_to_my_profile">Welcome to my profile!</string>
-    <string name="introduce">안녕하세요! 초보개발자 문다빈 입니다. 이번 기수도 안드 사람들과 우당탕탕 잘 지내보고 싶어요!! 개인적으로 알고리즘을 매우 좋아하니, 알고리즘 좋아하는 사람은 편히 다가와주세요 ㅎㅎ</string>
+    <string name="introduce">🌱초보 개발자 문다빈🌱</string>
+    <string name="star">star</string>
+    <string name="contribute">contribute</string>
+    <string name="profile_korea">프로필</string>
+    <string name="profile_add">"프로필 추가"</string>
+    <string name="repo_list">repository list</string>
+    <string name="plz_one_clicked">종류를 선택해주세요</string>
+    <string name="detailed_profile">detailed profile</string>
+    <string name="add"><u>추가하기</u></string>
+    <string name="restore">저장하기</string>
+    <string name="cancel">취소하기</string>
+    <string name="delete">삭제하기</string>
+    <string name="title_english">Title</string>
+    <string name="is_really_delete">정말 삭제하시겠습니까?</string>
+    <string name="is_really_delete_detail">삭제하게 되면 복구가 불가능합니다. 삭제하시겠습니까?</string>
+
+    <!--tools-->
+    <string name="title">제목</string>
+    <string name="content">내용</string>
+    <string name="language">언어</string>
+    <string name="date">21년 4월 27일</string>
+
+    <!--Star-->
+    <string name="favorites">즐겨찾기</string>
+    <string name="starred_repo">Starred Repo!</string>
+
+    <!--Contribute-->
+    <string name="grass">잔디밭</string>
+
+    <!--Setting-->
+    <string name="setting">"환경 설정"</string>
 </resources>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="profileResId" type="Integer" />
-        <variable name="logoResId" type="Integer" />
+        <variable name="title" type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,119 +12,55 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.MainActivity">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nsv_home"
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:layout_height="?attr/actionBarSize"
             app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/menu_setting"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_fill_blue_sky">
+                android:text="@{title ?? @string/profile_korea}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/marin"
+                android:layout_gravity="center"
+                tools:text="타이틀"/>
 
-                <ImageView
-                    android:id="@+id/iv_mint_logo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
-                    app:imgResId="@{logoResId}"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:background="@drawable/ic_person_mint" />
+        </androidx.appcompat.widget.Toolbar>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/rectangle_fill_white_30"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_mint_logo">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bnv_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_main"
+            app:userInputEnabled="@{false}"/>
 
-                    <ImageView
-                        android:id="@+id/iv_owner"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="40dp"
-                        app:imgResId="@{profileResId}"
-                        app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:background="@drawable/ic_person_mint" />
-
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/name"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/iv_owner"
-                        app:layout_constraintTop_toTopOf="@+id/iv_owner" />
-
-                    <TextView
-                        android:id="@+id/tv_git"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/git"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tv_name"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-                    <View
-                        android:id="@+id/line"
-                        android:layout_width="0dp"
-                        android:layout_height="2px"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@color/ocean_green"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_owner" />
-
-                    <TextView
-                        android:id="@+id/tv_welcome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:text="@string/welcome_to_my_profile"
-                        android:textColor="@color/ocean_green"
-                        android:textSize="25sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/line" />
-
-                    <TextView
-                        android:id="@+id/tv_introduce"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="@string/introduce"
-                        android:padding="35dp"
-                        android:textSize="17sp"
-                        android:textColor="@color/ocean_green"
-                        android:textStyle="bold"
-                        android:background="@drawable/rectangle_border_sky_10"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_alignParentBottom="true"
+            app:labelVisibilityMode="labeled"
+            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
+            app:itemIconTint="@drawable/selector_bottom_navigation"
+            app:itemTextColor="@drawable/selector_bottom_navigation"
+            app:menu="@menu/menu_main"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

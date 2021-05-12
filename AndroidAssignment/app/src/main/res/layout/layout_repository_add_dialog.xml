@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rectangle_fill_white_10"
+        android:padding="20dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repository_add"
+                    android:textColor="@color/ocean_green"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_title_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/repository_name"
+                    android:textColor="@color/ocean_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rectangle_border_gray_10"
+                    android:inputType="text"
+                    android:maxLength="10"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_title_add"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_add" />
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/repository_explanation"
+                    android:textColor="@color/ocean_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/et_title"
+                    app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/repository_specification"
+                    android:textColor="@color/ocean_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/et_content"
+                    app:layout_constraintStart_toStartOf="@+id/et_content"
+                    app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rectangle_border_gray_10"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:maxLines="2"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+
+                <EditText
+                    android:id="@+id/et_language"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rectangle_border_gray_10"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_language"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_language" />
+
+                <TextView
+                    android:id="@+id/tv_restore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/restore"
+                    android:textColor="@color/ocean_green"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/et_language"
+                    app:layout_constraintTop_toBottomOf="@+id/et_language" />
+
+                <TextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_restore"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_restore" />
+
+                <ImageButton
+                    android:id="@+id/ib_study"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/selector_book"
+                    app:layout_constraintStart_toStartOf="@+id/et_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_type" />
+
+                <ImageButton
+                    android:id="@+id/ib_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_people"
+                    app:layout_constraintBottom_toBottomOf="@+id/ib_study"
+                    app:layout_constraintEnd_toStartOf="@+id/ib_bulb"
+                    app:layout_constraintStart_toEndOf="@+id/ib_study" />
+
+                <ImageButton
+                    android:id="@+id/ib_bulb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/selector_bulb"
+                    app:layout_constraintEnd_toEndOf="@+id/et_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_type" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="0dp"
+                    android:layout_height="3px"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/marin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="0dp"
+                    android:layout_height="3px"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/marin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_project" />
+
+                <TextView
+                    android:id="@+id/tv_study"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/study"
+                    android:textColor="@color/marin"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ib_study"
+                    app:layout_constraintStart_toStartOf="@+id/ib_study"
+                    app:layout_constraintTop_toBottomOf="@+id/ib_study" />
+
+                <TextView
+                    android:id="@+id/tv_project"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/project"
+                    android:textColor="@color/marin"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ib_people"
+                    app:layout_constraintStart_toStartOf="@+id/ib_people"
+                    app:layout_constraintTop_toBottomOf="@+id/ib_people" />
+
+                <TextView
+                    android:id="@+id/tv_information"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/information"
+                    android:textColor="@color/marin"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ib_bulb"
+                    app:layout_constraintStart_toStartOf="@+id/ib_bulb"
+                    app:layout_constraintTop_toBottomOf="@+id/ib_bulb" />
+
+                <TextView
+                    android:id="@+id/tv_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:textColor="@color/ocean_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/language"
+                    app:layout_constraintStart_toStartOf="@+id/ib_study"
+                    app:layout_constraintTop_toBottomOf="@+id/line2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
