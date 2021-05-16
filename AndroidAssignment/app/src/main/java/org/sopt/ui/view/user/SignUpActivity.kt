@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.R
-import org.sopt.data.local.entity.UserData
+import org.sopt.data.remote.model.request.ReqSignUp
 import org.sopt.databinding.ActivitySignUpBinding
 import org.sopt.ui.base.BaseActivity
 import org.sopt.ui.viewmodel.UserViewModel
@@ -60,7 +60,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding, UserViewModel>() {
                 val id = binding.etId.text.toString()
                 val password = binding.etPassword.text.toString()
 
-                viewModel.insert(UserData(null, name, id, password))
+                viewModel.postSignUp(ReqSignUp(id, password, getString(R.string.one), name, getString(R.string.phone), getString(R.string.birth)))
 
                 setResult(Activity.RESULT_OK, Intent().putExtra("name", name)
                     .putExtra("id", id)

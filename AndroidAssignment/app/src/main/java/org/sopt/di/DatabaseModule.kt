@@ -9,7 +9,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import org.sopt.data.local.dao.ProfileDao
 import org.sopt.data.local.dao.RepoDao
-import org.sopt.data.local.dao.UserDao
 import org.sopt.data.local.database.LocalDatabase
 import javax.inject.Singleton
 
@@ -27,14 +26,8 @@ object DatabaseModule {
             .build()
 
     @Provides
-    fun provideUserDao(database: LocalDatabase): UserDao =
-            database.userDao
+    fun provideProfileDao(database: LocalDatabase): ProfileDao = database.profileDao
 
     @Provides
-    fun provideProfileDao(database: LocalDatabase): ProfileDao =
-            database.profileDao
-
-    @Provides
-    fun provideRepoDao(database: LocalDatabase): RepoDao =
-            database.repoDao
+    fun provideRepoDao(database: LocalDatabase): RepoDao = database.repoDao
 }

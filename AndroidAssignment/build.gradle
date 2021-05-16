@@ -2,16 +2,26 @@
 buildscript {
     ext {
         // room
-        room_version = "2.2.6"
+        room_version = "2.3.0"
+
+        //retrofit
+        retrofit_version = "2.9.0"
+
+        //okhttp
+        okHttp_version = '4.9.0'
 
         // lifecycle
-        lifecycle_version = "2.3.0"
+        lifecycle_version = "2.3.1"
 
         // arch
         arch_version = "2.1.0"
 
+        //coroutine
+        retrofit_coroutines_adapter_version = "0.9.2"
+        kotlin_coroutines_version = "1.1.0"
+
         // kotlin
-        kotlin_version = "1.4.21"
+        kotlin_version = "1.4.31"
     }
     repositories {
         google()

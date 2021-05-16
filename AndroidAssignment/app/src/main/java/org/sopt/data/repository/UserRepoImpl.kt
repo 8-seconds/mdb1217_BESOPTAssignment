@@ -1,59 +1,13 @@
 package org.sopt.data.repository
 
-import androidx.lifecycle.LiveData
-import kotlinx.coroutines.*
-import org.sopt.data.local.SOPTSharedPreference.setName
-import org.sopt.data.local.dao.UserDao
-import org.sopt.data.local.entity.UserData
+import org.sopt.data.remote.datasource.UserDataSource
+import org.sopt.data.remote.model.request.ReqSignIn
+import org.sopt.data.remote.model.request.ReqSignUp
+import org.sopt.data.remote.model.response.ResSignIn
+import org.sopt.data.remote.model.response.ResSignUp
 import javax.inject.Inject
 
-class UserRepoImpl @Inject constructor(private val userDao: UserDao) : UserRepo {
-    override fun getAll(): LiveData<List<UserData>> {
-        return userDao.getAll()
-    }
-
-    override fun findPasswordById(id: String, password: String) : Boolean {
-        runBlocking {
-            val job = CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val userData = userDao.findPasswordById(id)
-                    try {
-                        if (userData.password == password) {
-                            isIdPassExist = true
-                            setName(userData.name)
-                        }
-                        else {
-                            isIdPassExist = false
-                        }
-                    } catch (e: Exception) {
-                        isIdPassExist = false
-                    }
-                } catch (e: Exception) {
-
-                }
-            }
-            job.join()
-        }
-        return isIdPassExist
-    }
-
-   override fun insert(userData: UserData) {
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-               userDao.insert(userData)
-            }
-        } catch(e: Exception) { }
-    }
-
-    override fun delete(userData: UserData) {
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-                userDao.delete(userData)
-            }
-        } catch(e: Exception) { }
-    }
-
-    companion object {
-        var isIdPassExist : Boolean = false
-    }
+class UserRepoImpl @Inject constructor(private val userDataSource: UserDataSource) : UserRepo {
+    override suspend fun postSignUp(body: ReqSignUp): ResSignUp = userDataSource.postSignUp(body)
+    override suspend fun postSignIn(body: ReqSignIn): ResSignIn = userDataSource.postSignIn(body)
 }
