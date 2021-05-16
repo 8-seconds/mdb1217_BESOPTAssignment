@@ -44,7 +44,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
     }
 
     override fun initView() {
-        binding.lifecycleOwner = this
         autoLogin()
         initClickEvent()
         initFocusEvent()
@@ -81,9 +80,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
 
             when(isEtIdEmpty() || isEtPasswordEmpty()) {
                 true -> shortToast(getString(R.string.is_empty))
-                else -> lifecycleScope.launch {
-                    viewModel.postSignIn(ReqSignIn(email = id, password = password)).join()
-                }
+                else -> viewModel.postSignIn(ReqSignIn(email = id, password = password))
             }
         }
 

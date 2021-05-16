@@ -5,10 +5,12 @@ import android.content.Intent
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.R
+import org.sopt.data.local.SOPTSharedPreference
 import org.sopt.data.remote.model.request.ReqSignUp
 import org.sopt.databinding.ActivitySignUpBinding
 import org.sopt.ui.base.BaseActivity
 import org.sopt.ui.viewmodel.UserViewModel
+import org.sopt.util.EventObserver
 import org.sopt.util.shortToast
 
 @AndroidEntryPoint
@@ -20,6 +22,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding, UserViewModel>() {
     override fun initView() {
         initFocusEvent()
         initClickEvent()
+    }
+
+    override fun initAfterBinding() {
+        observeSignUpResult()
     }
 
     private fun initFocusEvent() {
@@ -66,10 +72,20 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding, UserViewModel>() {
                     .putExtra("id", id)
                     .putExtra("password", password)
                 )
-                shortToast(getString(R.string.sign_up_done))
-                finish()
             }
         }
+    }
+
+    private fun observeSignUpResult() {
+        viewModel.signUpEvent.observe(this, EventObserver{
+            when(it) {
+                true -> {
+                    shortToast(getString(R.string.sign_up_done))
+                    finish()
+                }
+                else -> shortToast(getString(R.string.sign_up_fail))
+            }
+        })
     }
 
     private fun isAllEditTextEmpty() : Boolean = isEtNameEmpty() || isEtIdEmpty() || isEtPasswordEmpty()
