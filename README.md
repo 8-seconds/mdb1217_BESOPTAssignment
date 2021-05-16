@@ -2,7 +2,7 @@
 
 [![WrittenBy](https://img.shields.io/badge/Written%20by-mdb1217-white.svg)](https://github.com/mdb1217)
 
-:calendar: **Last Edited : `2021. 05. 13`**
+:calendar: **Last Edited : `2021. 05. 16`**
 
 <br>
 
@@ -10,8 +10,7 @@
 
 [:zero: Specification](#zero-specification)<br>
 [:one: First Week](#one-first-week)<br>
-[:two: Second Week](#two-second-week)<br>
-[:three: Package Structure](#three-package-structure)<br>
+[:two: Second Week](#two-second-week)<br>[:three: third Week](#three-third-week)<br>[:four: Package Structure](#four-package-structure)<br>
 
 ---
 
@@ -32,6 +31,10 @@
 <td>DataBinding, LiveData, ViewModel, Lifecycle, Room, ViewPager2, CardView</td>
 </tr>
 <tr>
+  <tr>
+    <td><b>Network</b></td>
+<td>Retrofit2, OkHttp3</td>
+</tr>
   <tr>
     <td><b>Asynchronous Processing</b></td>
 <td>Coroutine</td>
@@ -283,6 +286,7 @@
 </tbody>
 </table>
 
+
 <br>
 
 ##### :bulb: 이번 과제를 통해 배운내용
@@ -295,7 +299,7 @@
 
 <br>
 
-#### 2. Level 2 👧​
+#### 2. Level 2 👧
 
 - [사용하는 Naming Convention을 정리한 글](https://github.com/8-seconds/WIKI_FOR_8_SECONDS/blob/main/Android/tip/AndroidNamingConvention.md)
 
@@ -365,6 +369,7 @@
 </tbody>
 </table>
 
+
 <br>
 
 #### 1. Level 1 :baby:
@@ -381,76 +386,78 @@
             _data.addAll(value)
             notifyDataSetChanged()
         }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         val binding: ItemDetailedProfileBinding = ItemDetailedProfileBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false)
-
+    
         return ProfileViewHolder(binding)
     }
-
+    
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
         holder.bind(_data[position])
     }
-
+    
     fun setTodoList(list: List<ProfileData>) {
         data = list.toMutableList()
         notifyDataSetChanged()
     }
-
+    
     override fun getItemCount(): Int = _data.size
-
+    
     class ProfileViewHolder(private val binding: ItemDetailedProfileBinding) :
             RecyclerView.ViewHolder(binding.root) {
-
+    
         fun bind(profileData: ProfileData) {
             binding.profileData = profileData
         }
     }
     ```
-    
+
  <br>
     
+
  - **Elipsize and MaxLine 통해 text의 size 조절**
 
-    ```xml
-    <TextView
-                android:id="@+id/tv_repo_explanation"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="60dp"
-                android:layout_marginBottom="8dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="@{repoData.explanation}"
-                android:textColor="@color/ocean_green"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_type"
-                app:layout_constraintStart_toStartOf="@+id/line"
-                app:layout_constraintTop_toBottomOf="@+id/line"
-                tools:text="@string/content" />
+   ```xml
+   <TextView
+               android:id="@+id/tv_repo_explanation"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="3dp"
+               android:layout_marginTop="8dp"
+               android:layout_marginEnd="60dp"
+               android:layout_marginBottom="8dp"
+               android:ellipsize="end"
+               android:singleLine="true"
+               android:text="@{repoData.explanation}"
+               android:textColor="@color/ocean_green"
+               android:textSize="16sp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/iv_type"
+               app:layout_constraintStart_toStartOf="@+id/line"
+               app:layout_constraintTop_toBottomOf="@+id/line"
+               tools:text="@string/content" />
+   
+   <TextView
+           android:id="@+id/tv_title_add"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="8dp"
+           android:layout_marginTop="20dp"
+           android:text="@string/title"
+           android:textColor="@color/ocean_green"
+           android:textSize="16sp"
+           android:textStyle="bold"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+   ```
 
-    <TextView
-            android:id="@+id/tv_title_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/title"
-            android:textColor="@color/ocean_green"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-    ```
-<br>
+   <br>
 
  - **ViewPager2 통해서 fragment 띄워주기(Level 1-3 버튼대신 뷰페이저 이용)**
- 
+
 
 ```kotlin
     class MainViewPagerAdapter(activity: MainActivity) : FragmentStateAdapter(activity) {
@@ -465,9 +472,10 @@
 
 <br>
 
-#### 2. Level 2 👧​
+#### 2. Level 2 👧
 
 - **Grid Layout**
+
 ```xml
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_profile_list"
@@ -485,6 +493,7 @@
 <br>
 
 - **ItemTouchHealper 이용해서 swipe로 삭제 기능 구현**
+
 ```kotlin
     override fun onItemSwiped(position: Int) {
         dataSwipeListener?.invoke(_data[position])
@@ -495,7 +504,169 @@
 
 <br>
 
-## :three: Package Structure
+## :three: Third Week
+
+<table class="tg">
+<tbody>
+    <tr>
+      <td><b>Sign Up, Sign In</b></td>
+      <td><b>GitHub Follower</b></td>
+    </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/70698151/118401692-94f4e780-b6a1-11eb-9a4d-65d3da08587a.gif" width="300px"/></td>
+    <td><img src="https://user-images.githubusercontent.com/70698151/118401699-a0481300-b6a1-11eb-84da-dca7bf129d02.gif"  width="300px"/></td>
+	</tr>
+</tbody>
+</table>
+
+<br>
+
+#### 1. Level 1 :baby:
+
+- ##### PostMan 테스트
+
+  <table class="tg">
+  <tbody>
+      <tr>
+        <td><b>Sign Up</b></td>
+        <td><b>Sign In</b></td>
+      </tr>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/70698151/118401499-e8b30100-b6a0-11eb-8518-e24844083d13.png" width="600px"/></td>
+<td><img src="https://user-images.githubusercontent.com/70698151/118401490-e3ee4d00-b6a0-11eb-925b-2615ee44e1e7.png" width="600px"/>
+	    </td>
+  	</tr>
+  </tbody>
+  </table>
+
+<br>
+
+- ##### Retrofit Interface(hilt로 싱글톤 객체 생성)
+
+  ```kotlin
+  @UserRetrofit
+  @Provides
+  @Singleton
+  fun provideUserRetrofitObject(): Retrofit {
+      return Retrofit.Builder().baseUrl(USER_URL).client(getOkHttpClient())
+              .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(CoroutineCallAdapterFactory()).build()
+  }
+  
+  @GitRetrofit
+  @Provides
+  @Singleton
+  fun provideGitRetrofitObject(): Retrofit {
+      return Retrofit.Builder().baseUrl(GIT_URL).client(getOkHttpClient())
+          .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(CoroutineCallAdapterFactory()).build()
+  }
+  ```
+
+- ##### UserService
+
+  ```kotlin
+  interface UserService {
+      //POST 회원가입
+      @POST("/login/signup")
+      suspend fun postSignUp(
+              @Body body: ReqSignUp
+      ): ResSignUp
+  
+      //POST 로그인
+      @POST("/login/signin")
+      suspend fun postSignIn(
+              @Body body: ReqSignIn
+      ): ResSignIn
+  }
+  ```
+
+- ##### Sign In, Sign Up
+
+```kotlin
+fun postSignUp(reqSignUp: ReqSignUp) = viewModelScope.launch {
+    runCatching { userRepo.postSignUp(reqSignUp) }
+        .onSuccess { _signUpEvent.postValue(Event(true)) }
+        .onFailure {
+            _signUpEvent.postValue(Event(false))
+            it.printStackTrace()
+        }
+}
+
+fun postSignIn(reqSignIn: ReqSignIn) = viewModelScope.launch {
+    runCatching { userRepo.postSignIn(reqSignIn) }
+        .onSuccess {
+            _signInEvent.postValue(Event(true))
+            setName(it.data.user_nickname)
+        }
+        .onFailure {
+            _signInEvent.postValue(Event(false))
+            it.printStackTrace()
+        }
+}
+```
+
+```kotlin
+viewModel.signInEvent.observe(this, EventObserver{
+    when(it) {
+        true -> {
+            shortToast(getString(R.string.welcome) + getName() + getString(R.string.sir))
+            setAutoLogin(binding.ibCheckBox.isSelected)
+            startMainActivity()
+        }
+        else -> shortToast(getString(R.string.not_match_id_password))
+    }
+})
+```
+
+```kotlin
+viewModel.signUpEvent.observe(this, EventObserver{
+    when(it) {
+        true -> {
+            shortToast(getString(R.string.sign_up_done))
+            finish()
+        }
+        else -> shortToast(getString(R.string.sign_up_fail))
+    }
+})
+```
+
+<br>
+
+##### :bulb: 이번 과제를 통해 배운내용
+
+- suspend 활용법(콜백지옥이 안되서 매우 좋음 ㅎㅎ)
+
+<br>
+
+#### 2. Level 2 👧
+
+- ##### GitService
+
+  ```kotlin
+  interface GitService {
+      @GET("/users/{username}/followers")
+      suspend fun geFollower(
+          @Path("username") username:String
+      ): List<ResFollower>
+  }
+  ```
+
+- ##### 뷰모델에서 통신 성공 실패 처리
+
+  ```kotlin
+  fun getFollower() = viewModelScope.launch {
+      runCatching { gitRepo.getFollower("mdb1217") }
+          .onSuccess {
+              _followerList.postValue(it)
+          }
+          .onFailure {
+              it.printStackTrace()
+          }
+  }
+  ```
+
+<br>
+
+## :four: Package Structure
 
 ```
 📦 org.sopt
