@@ -11,13 +11,13 @@ import retrofit2.http.POST
 interface UserService {
     //POST	회원가입
     @POST("/login/signup")
-    fun postSignUp(
+    suspend fun postSignUp(
             @Body body: ReqSignUp
     ): ResSignUp
 
     //POST	로그인
     @POST("/login/signin")
-    fun postSignIn(
+    suspend fun postSignIn(
             @Body body: ReqSignIn
     ): ResSignIn
 }

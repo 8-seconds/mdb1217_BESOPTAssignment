@@ -7,10 +7,18 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.sopt.data.remote.api.GitService
 import org.sopt.data.remote.api.UserService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
+
+@Qualifier
+annotation class GitRetrofit
+
+@Qualifier
+annotation class UserRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -25,18 +33,32 @@ object NetworkModule {
         .addInterceptor(httpLoggingInterceptor())
         .build()
 
+    @UserRetrofit
     @Provides
     @Singleton
-    fun provideRetrofitObject(): Retrofit {
-        return Retrofit.Builder().baseUrl(BASE_URL).client(getOkHttpClient())
+    fun provideUserRetrofitObject(): Retrofit {
+        return Retrofit.Builder().baseUrl(USER_URL).client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(CoroutineCallAdapterFactory()).build()
+    }
+
+    @GitRetrofit
+    @Provides
+    @Singleton
+    fun provideGitRetrofitObject(): Retrofit {
+        return Retrofit.Builder().baseUrl(GIT_URL).client(getOkHttpClient())
+            .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(CoroutineCallAdapterFactory()).build()
     }
 
     @Provides
     @Singleton
-    fun provideUserService(retrofit: Retrofit): UserService =
+    fun provideUserService(@UserRetrofit retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideGitService(@GitRetrofit retrofit: Retrofit): GitService =
+        retrofit.create(GitService::class.java)
 
-    private const val BASE_URL = "http://cherishserver.com"
+    private const val USER_URL = "http://cherishserver.com"
+    private const val GIT_URL = "https://api.github.com"
 }

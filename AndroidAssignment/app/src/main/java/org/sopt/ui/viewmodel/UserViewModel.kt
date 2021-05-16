@@ -35,12 +35,10 @@ class UserViewModel@Inject constructor(private val userRepo: UserRepo) : ViewMod
     fun postSignIn(reqSignIn: ReqSignIn) = viewModelScope.launch {
         runCatching { userRepo.postSignIn(reqSignIn) }
             .onSuccess {
-                Log.d("hi", "success")
                 _signInEvent.postValue(Event(true))
                 setName(it.data.user_nickname)
             }
             .onFailure {
-                Log.d("hi", "fail")
                 _signInEvent.postValue(Event(false))
                 it.printStackTrace()
             }
