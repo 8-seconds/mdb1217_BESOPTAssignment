@@ -2,17 +2,22 @@ package org.sopt.ui.view.user
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import org.sopt.R
 import org.sopt.data.local.SOPTSharedPreference.getAutoLogin
 import org.sopt.data.local.SOPTSharedPreference.getName
 import org.sopt.data.local.SOPTSharedPreference.setAutoLogin
+import org.sopt.data.remote.model.request.ReqSignIn
 import org.sopt.databinding.ActivitySignInBinding
 import org.sopt.ui.base.BaseActivity
 import org.sopt.ui.view.MainActivity
 import org.sopt.ui.viewmodel.UserViewModel
+import org.sopt.util.EventObserver
 import org.sopt.util.shortToast
 
 @AndroidEntryPoint
@@ -44,6 +49,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
         initFocusEvent()
     }
 
+    override fun initAfterBinding() {
+        observeSignInResult()
+    }
+
     private fun initFocusEvent() {
         binding.etId.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus)
@@ -69,16 +78,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
             val id = binding.etId.text.toString()
             val password = binding.etPassword.text.toString()
 
-            if(isEtIdEmpty() || isEtPasswordEmpty())
-                shortToast(getString(R.string.is_empty))
-            else {
-                if(viewModel.findPasswordById(id, password)) {
-                    shortToast(getString(R.string.welcome) + getName() + getString(R.string.sir))
-                    setAutoLogin(binding.ibCheckBox.isSelected)
-                    startMainActivity()
-                }
-                else
-                    shortToast(getString(R.string.not_match_id_password))
+            when(isEtIdEmpty() || isEtPasswordEmpty()) {
+                true -> shortToast(getString(R.string.is_empty))
+                else -> viewModel.postSignIn(ReqSignIn(email = id, password = password))
             }
         }
 
@@ -97,6 +99,20 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, UserViewModel>() {
             startMainActivity()
         }
     }
+
+    private fun observeSignInResult() {
+        viewModel.signInEvent.observe(this, EventObserver{
+            when(it) {
+                true -> {
+                    shortToast(getString(R.string.welcome) + getName() + getString(R.string.sir))
+                    setAutoLogin(binding.ibCheckBox.isSelected)
+                    startMainActivity()
+                }
+                else -> shortToast(getString(R.string.not_match_id_password))
+            }
+        })
+    }
+
 
     private fun isEtIdEmpty() : Boolean = binding.etId.text.isNullOrEmpty()
 

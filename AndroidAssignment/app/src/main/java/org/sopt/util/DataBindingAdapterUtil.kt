@@ -16,6 +16,12 @@ object DataBindingAdapterUtil {
     }
 
     @JvmStatic
+    @BindingAdapter("remoteImgResId")
+    fun setRemoteCircleImage(image: ImageView, url: String) {
+        Glide.with(image.context).load(url).override(200, 200).circleCrop().into(image)
+    }
+
+    @JvmStatic
     @BindingAdapter("imgType")
     fun setRepoTypeImage(image: ImageView, type: Int) {
         with(image) {
