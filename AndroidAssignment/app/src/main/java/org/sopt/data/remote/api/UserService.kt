@@ -4,7 +4,6 @@ import org.sopt.data.remote.model.request.ReqSignIn
 import org.sopt.data.remote.model.request.ReqSignUp
 import org.sopt.data.remote.model.response.ResSignIn
 import org.sopt.data.remote.model.response.ResSignUp
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 

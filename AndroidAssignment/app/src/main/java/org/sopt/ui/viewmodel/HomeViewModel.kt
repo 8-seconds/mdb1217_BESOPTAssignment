@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.sopt.data.local.SOPTSharedPreference
 import org.sopt.data.local.entity.ProfileData
 import org.sopt.data.local.entity.RepoData
 import org.sopt.data.remote.model.response.ResFollower
 import org.sopt.data.repository.GitRepo
 import org.sopt.data.repository.HomeRepo
-import org.sopt.util.Event
 import javax.inject.Inject
 
 @HiltViewModel

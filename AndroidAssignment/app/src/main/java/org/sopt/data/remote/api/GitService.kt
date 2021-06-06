@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 interface GitService {
     @GET("/users/{username}/followers")
-    suspend fun geFollower(
+    suspend fun getFollower(
         @Path("username") username:String
     ): List<ResFollower>
 }
