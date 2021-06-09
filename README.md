@@ -2,7 +2,7 @@
 
 [![WrittenBy](https://img.shields.io/badge/Written%20by-mdb1217-white.svg)](https://github.com/mdb1217)
 
-:calendar: **Last Edited : `2021. 05. 16`**
+:calendar: **Last Edited : `2021. 06. 09`**
 
 <br>
 
@@ -10,7 +10,7 @@
 
 [:zero: Specification](#zero-specification)<br>
 [:one: First Week](#one-first-week)<br>
-[:two: Second Week](#two-second-week)<br>[:three: third Week](#three-third-week)<br>[:four: Package Structure](#four-package-structure)<br>
+[:two: Second Week](#two-second-week)<br>[:three: Third Week](#three-third-week)<br>[:four: Seventh Week](#four-seventh-week)<br>[:five: Package Structure](#five-package-structure)<br>
 
 ---
 
@@ -661,6 +661,149 @@ viewModel.signUpEvent.observe(this, EventObserver{
           .onFailure {
               it.printStackTrace()
           }
+  }
+  ```
+
+<br>
+
+## :four: Seventh Week
+
+<table class="tg">
+<tbody>
+    <tr>
+      <td><b>Auto Login</b></td>
+      <td><b>Logout</b></td>
+    </tr>
+  <tr>
+    <td><img src="/WIKI/auto_login.gif" width="300px"/></td>
+    <td><img src="/WIKI/logout.gif"  width="300px"/></td>
+	</tr>
+</tbody>
+</table>
+
+
+<br>
+
+#### 1. Level 1 :baby:
+
+- ##### 자동로그인 로직
+
+  - **Auto Login**
+
+    `SharedPreference`에서 AutoLogin 여부를 알려주는 boolean 변수를 정의해, 그 값이 **true**이면 자동로그인 처리
+
+  ```kotlin
+  private fun autoLogin() {
+          if(getAutoLogin()) {
+              shortToast(getString(R.string.auto_login_done))
+              startMainActivity()
+          }
+      }
+  ```
+
+  - ##### Logout
+
+    `SharedPreference`에 저장된 모든 값들을 **clear**해줘서, logout구현(Auto Login 해제)
+
+  ```kotlin
+  binding.clLogout.setOnClickListener {
+              clearStorage()
+              startSignIn()
+              finishAffinity()
+          }
+  ```
+
+  - ##### SharedPreference(+초기화 코드)
+
+```kotlin
+object SOPTSharedPreference {
+    private const val AUTO_LOGIN = "AUTO_LOGIN"
+    private const val USER_NAME = "USER_NAME"
+
+    lateinit var preferences: SharedPreferences
+
+    fun init(context: Context) {
+        preferences = context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+    }
+
+    fun getAutoLogin(): Boolean = preferences.getBoolean(AUTO_LOGIN, false)
+
+    fun setAutoLogin(value: Boolean) {
+        preferences.edit{putBoolean(AUTO_LOGIN, value)}
+    }
+
+    fun getName(): String? = preferences.getString(USER_NAME, "")
+
+    fun setName(value: String) {
+        preferences.edit{putString(USER_NAME, value)}
+    }
+
+    fun clearStorage() {
+        preferences.edit { clear() }
+    }
+}
+```
+
+```kotlin
+@HiltAndroidApp
+class ApplicationController : Application() {
+    companion object {
+        lateinit var INSTANCE: ApplicationController
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        INSTANCE = this
+        SOPTSharedPreference.init(applicationContext)
+    }
+}
+```
+
+ <br>
+
+##### :bulb: 이번 과제를 통해 배운내용
+
+- 툴바 활용법
+- SharedPreference 활용법
+- 확장함수 활용법
+
+<br>
+
+#### 2. Level 2 👧
+
+- ##### Toast Extension
+
+  ```kotlin
+  //activity용
+  fun Context.shortToast(message: String) {
+      Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+  }
+  
+  //fragment용
+  fun shortToastRequireContext(context: Context, message: String) {
+      Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+  }
+  ```
+
+- ##### Dialog Extension
+
+  ```kotlin
+  //Dialog 생성
+  fun makeDialog(context : Context) = Dialog(context, R.style.DialogCustom)
+  
+  //Dialog 스타일 적용
+  fun setDialog(dialog : Dialog, view : View) {
+      dialog.apply {
+          requestWindowFeature(Window.FEATURE_NO_TITLE)
+          setCancelable(false)
+          setContentView(view)
+  
+          with(window?.attributes) {
+              this?.width = WindowManager.LayoutParams.MATCH_PARENT
+              this?.height = WindowManager.LayoutParams.WRAP_CONTENT
+              this?.verticalWeight = 1F
+          }
+      }
   }
   ```
 
