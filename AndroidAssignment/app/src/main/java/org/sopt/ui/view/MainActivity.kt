@@ -1,5 +1,7 @@
 package org.sopt.ui.view
 
+import android.content.Intent
+import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -8,6 +10,7 @@ import org.sopt.databinding.ActivityMainBinding
 import org.sopt.ui.base.BaseActivity
 import org.sopt.ui.view.adapter.MainViewPagerAdapter
 import org.sopt.ui.view.contribution.ContributeFragment
+import org.sopt.ui.view.mypage.MyPageActivity
 import org.sopt.ui.view.profile.ProfileFragment
 import org.sopt.ui.view.star.StarFragment
 import org.sopt.ui.viewmodel.HomeViewModel
@@ -20,6 +23,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeViewModel>() {
     lateinit var mainViewPagerAdapter: MainViewPagerAdapter
 
     override fun initView() {
+        initToolbar()
         initMainViewPager()
         initMainBottomNavigation()
     }
@@ -55,5 +59,29 @@ class MainActivity : BaseActivity<ActivityMainBinding, HomeViewModel>() {
             whichNavigationItemSelected(it)
             true
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_setting, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_modify -> {
+                startMyPageActivity()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(binding.tbMain)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun startMyPageActivity() {
+        startActivity(Intent(this, MyPageActivity::class.java))
     }
 }
