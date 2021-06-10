@@ -2,12 +2,15 @@ package org.sopt.util
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import org.sopt.R
 
 fun Context.shortToast(message: String) {
@@ -31,6 +34,13 @@ fun setDialog(dialog : Dialog, view : View) {
             this?.height = WindowManager.LayoutParams.WRAP_CONTENT
             this?.verticalWeight = 1F
         }
+    }
+}
+
+fun Context.startContact(url : String) {
+    with(Intent(Intent.ACTION_VIEW)) {
+        data = Uri.parse(url)
+        startActivity(this)
     }
 }
 
