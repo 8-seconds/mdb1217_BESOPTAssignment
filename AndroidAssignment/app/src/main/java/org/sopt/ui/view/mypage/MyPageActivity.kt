@@ -1,7 +1,6 @@
 package org.sopt.ui.view.mypage
 
 import android.content.Intent
-import android.net.Uri
 import androidx.activity.viewModels
 import org.sopt.R
 import org.sopt.data.local.SOPTSharedPreference.clearStorage
@@ -10,6 +9,7 @@ import org.sopt.databinding.ActivityMyPageBinding
 import org.sopt.ui.base.BaseActivity
 import org.sopt.ui.view.user.SignInActivity
 import org.sopt.ui.viewmodel.UserViewModel
+import org.sopt.util.startContact
 
 class MyPageActivity : BaseActivity<ActivityMyPageBinding, UserViewModel>() {
     override val layoutResourceId: Int
@@ -23,43 +23,30 @@ class MyPageActivity : BaseActivity<ActivityMyPageBinding, UserViewModel>() {
         initClickEvent()
     }
 
-    private fun initUserName() {
-        binding.name = getName()
-    }
+    private fun initUserName() { binding.name = getName() }
 
     private fun initToolBar() {
         setSupportActionBar(binding.tbMypage)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        binding.tbMypage.setNavigationOnClickListener {
-            finish()
-        }
+        binding.tbMypage.setNavigationOnClickListener { finish() }
     }
 
     private fun initClickEvent() {
-        binding.clLogout.setOnClickListener {
-            clearStorage()
-            startSignIn()
-            finishAffinity()
-        }
+        binding.apply {
+            clLogout.setOnClickListener {
+                clearStorage()
+                startSignIn()
+            }
 
-        binding.ibBlog.setOnClickListener {
-            startContact(BLOG_URL)
-        }
+            ibBlog.setOnClickListener { startContact(BLOG_URL) }
 
-        binding.ibGithub.setOnClickListener {
-            startContact(GIT_URL)
+            ibGithub.setOnClickListener { startContact(GIT_URL) }
         }
     }
 
     private fun startSignIn() {
         startActivity(Intent(this@MyPageActivity, SignInActivity::class.java))
-    }
-
-    private fun startContact(url : String) {
-        with(Intent(Intent.ACTION_VIEW)) {
-            data = Uri.parse(url)
-            startActivity(this)
-        }
+        finishAffinity()
     }
 
     companion object {
