@@ -20,7 +20,7 @@ class StarFragment : BaseFragment<FragmentStarBinding, HomeViewModel>() {
     }
 
     override fun initAfterBinding() {
-        viewModel.getStaredRepo().observe(this, {
+        viewModel.getStaredRepo().observe(viewLifecycleOwner, {
             starCardAdapter.data = it
         })
     }

@@ -32,7 +32,7 @@ class ContributeFragment : BaseFragment<FragmentContributeBinding, HomeViewModel
     private fun initAdapter() { binding.rvFollowerList.adapter = followerListAdapter }
 
     private fun observeFollowerData() {
-        viewModel.followerList.observe(this, {
+        viewModel.followerList.observe(viewLifecycleOwner, {
             followerListAdapter.data = it
         })
     }
