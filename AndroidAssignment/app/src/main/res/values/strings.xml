@@ -60,6 +60,7 @@
     <string name="birth">1998-12-17</string>
     <string name="phone">010-5144-4190</string>
 
+
     <!--contribute-->
     <string name="follower">Follower List</string>
 
@@ -72,4 +73,6 @@
 
     <!--Setting-->
     <string name="setting">"환경 설정"</string>
+    <string name="logout">로그아웃</string>
+    <string name="contact">"contact with me?"</string>
 </resources>

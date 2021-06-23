@@ -25,4 +25,8 @@ object SOPTSharedPreference {
     fun setName(value: String) {
         preferences.edit{putString(USER_NAME, value)}
     }
+
+    fun clearStorage() {
+        preferences.edit { clear() }
+    }
 }

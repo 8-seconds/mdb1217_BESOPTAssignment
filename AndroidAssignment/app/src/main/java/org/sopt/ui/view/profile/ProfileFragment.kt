@@ -58,7 +58,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, HomeViewModel>() {
     }
 
     override fun initAfterBinding() {
-        viewModel.getProfileDataAll().observe(this, {
+        viewModel.getProfileDataAll().observe(viewLifecycleOwner, {
             profileListAdapter.data = it
         })
 

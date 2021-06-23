@@ -11,14 +11,8 @@ import org.sopt.data.remote.api.GitService
 import org.sopt.data.remote.api.UserService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Qualifier
+import javax.inject.Named
 import javax.inject.Singleton
-
-@Qualifier
-annotation class GitRetrofit
-
-@Qualifier
-annotation class UserRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -33,7 +27,7 @@ object NetworkModule {
         .addInterceptor(httpLoggingInterceptor())
         .build()
 
-    @UserRetrofit
+    @Named("UserRetrofit")
     @Provides
     @Singleton
     fun provideUserRetrofitObject(): Retrofit {
@@ -41,7 +35,7 @@ object NetworkModule {
                 .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(CoroutineCallAdapterFactory()).build()
     }
 
-    @GitRetrofit
+    @Named("GitRetrofit")
     @Provides
     @Singleton
     fun provideGitRetrofitObject(): Retrofit {
@@ -51,12 +45,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideUserService(@UserRetrofit retrofit: Retrofit): UserService =
+    fun provideUserService(@Named("UserRetrofit") retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
 
     @Provides
     @Singleton
-    fun provideGitService(@GitRetrofit retrofit: Retrofit): GitService =
+    fun provideGitService(@Named("GitRetrofit") retrofit: Retrofit): GitService =
         retrofit.create(GitService::class.java)
 
     private const val USER_URL = "http://cherishserver.com"
