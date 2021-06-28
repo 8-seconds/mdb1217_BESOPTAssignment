@@ -62,7 +62,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, HomeViewModel>() {
             profileListAdapter.data = it
         })
 
-        viewModel.getRepoDataAll().observe(this, {
+        viewModel.getRepoDataAll().observe(viewLifecycleOwner, {
             repoListAdapter.data = it
         })
     }
